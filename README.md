@@ -1,53 +1,152 @@
-# Mini SQL Engine
+Mini SQL Database Engine
+A simplified, in-memory SQL query engine built from scratch in Python.
+This project demonstrates the core principles of database query processing by implementing a parser and execution engine for basic SQL operations.
 
-## Overview
-This project is a simplified in-memory SQL engine written in Python. It can load CSV files and execute basic SQL queries (SELECT, WHERE, COUNT).
+Features
+Load data from CSV files into memory
+Parse and execute SQL queries
+Support for SELECT, FROM, WHERE, and COUNT operations
+Interactive command-line interface (REPL)
+Comprehensive error handling
+Modular design: parser, engine, CLI separated
+Supported SQL Grammar
+SELECT Statement
+SELECT * FROM table
+SELECT column1, column2 FROM table
+SELECT COUNT(*) FROM table
+SELECT COUNT(column_name) FROM table
 
-## Features
-- Load CSV data into memory
-- SELECT all or specific columns
-- WHERE clause with basic conditions
-- COUNT aggregation
-- CLI interface to run queries
+WHERE Clause
+SELECT * FROM table WHERE column = 'value'
+SELECT * FROM table WHERE column != 'value'
+SELECT * FROM table WHERE column > 100
+SELECT * FROM table WHERE column < 100
+SELECT * FROM table WHERE column >= 100
+SELECT * FROM table WHERE column <= 100
 
-## Supported SQL Grammar
-- `LOAD <filename> AS <table_name>`
-- `SELECT * FROM <table_name>`
-- `SELECT col1, col2 FROM <table_name>`
-- `SELECT * FROM <table_name> WHERE col = 'value'`
-- `SELECT COUNT(*) FROM <table_name>`
-- `SELECT COUNT(col_name) FROM <table_name> WHERE col = 'value'`
+Supported Operators
 
-## Usage
-1. Clone the repo:  
-   `git clone https://github.com/Lavanyakana/mini-sql-engine-23A91A1228.git`
+= : Equal to
 
-2. Go into the folder:  
-   `cd mini-sql-engine-23A91A1228`
+!= : Not equal to
 
-3. Run the REPL:  
-   `python repl.py`
+> : Greater than
 
-4. Example commands:
-```sql
-LOAD sample_users.csv AS sample;
-SELECT * FROM sample;
-SELECT name, age FROM sample WHERE name = 'John';
-SELECT COUNT(*) FROM sample;
-# Mini SQL Engine (Python)
+< : Less than
 
-This project is a simple SQL query engine built in Python.  
-It loads CSV files and supports a limited SQL grammar including:
-- SELECT *
-- SELECT col1, col2
-- WHERE with conditions (=, <, >)
-- COUNT(*)
-- Loading CSV into memory
-- Running queries through a CLI (REPL)
+>= : Greater than or equal to
 
----
+<= : Less than or equal to
 
-## 🚀 How to Run
+Limitations
 
-### 1. Install Python 3
-Make sure Python is installed:
+Only single WHERE condition supported (no AND/OR)
+
+String values must be enclosed in single quotes
+
+Table name is derived from the CSV filename (without .csv extension)
+
+Installation
+
+1. Clone this repository:
+git clone https://github.com/PavaniVattikolla/mini-sql-engine.git
+cd mini-sql-engine
+2. Install required dependencies:
+pip install faker
+Python's csv module is built-in; no installation needed.
+
+Setup
+Generate Sample Data
+
+Run the generator to create sample CSV files:
+python generate_sample_data.py
+
+This will create:
+
+-> data/employees.csv – 50 rows of employee data
+
+-> data/products.csv – 30 rows of product data
+
+Tip: Using data/ folder keeps CSVs separate and organized.
+
+Usage
+Start CLI
+python cli.py
+
+Commands
+
+LOAD <filepath> – Load a CSV file
+
+SELECT … – Run SQL queries
+
+HELP – Show commands and grammar
+
+EXIT / QUIT – Exit the CLI
+
+Examples
+-- Select all columns
+SELECT * FROM employees
+
+-- Select specific columns
+SELECT name, age, salary FROM employees
+
+-- Filter with WHERE clause
+SELECT * FROM employees WHERE age > 30
+SELECT name, department FROM employees WHERE country = 'USA'
+
+-- Count rows
+SELECT COUNT(*) FROM employees
+SELECT COUNT(name) FROM employees WHERE department = 'Engineering'
+
+Error Handling
+
+Invalid SQL syntax
+
+Non-existent columns or tables
+
+Missing CSV files
+
+Type mismatches in WHERE
+
+Unsupported SQL operations
+
+Project Structure
+mini-sql-engine/
+│
+├── cli.py                  # Command-line interface
+├── engine.py               # Query execution engine
+├── parser.py               # SQL parser
+├── generate_sample_data.py # Sample data generator
+├── README.md               # Project documentation
+├── .gitignore
+├── LICENSE                 # (Add MIT or other license)
+└── data/                   # CSV files
+    ├── employees.csv
+    └── products.csv
+
+
+Future Enhancements
+
+Support multiple WHERE conditions (AND/OR)
+
+JOIN operations between tables
+
+Additional aggregate functions (SUM, AVG, MIN, MAX)
+
+ORDER BY and LIMIT
+
+INSERT, UPDATE, DELETE operations
+
+Persistent storage for tables
+
+Automated test suite
+
+Requirements
+
+Python 3.7+
+
+faker library (for sample data generation)
+
+Author
+
+Created as part of the Partnr Network Global Placement Program.
